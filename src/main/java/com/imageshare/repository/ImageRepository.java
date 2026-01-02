@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface ImageRepository extends MongoRepository<Image, String> {
     List<Image> findByUserId(String userId);
-
-    List<Image> findAll();
 }
 
 
