@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: imageshare-backend
+  
+  data:
+    mongodb:
+      uri: ${AZURE_COSMOS_CONNECTIONSTRING}
+      database: imageshare
+  
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+azure:
+  storage:
+    connection-string: ${AZURE_STORAGE_CONNECTION_STRING}
+    container-name: ${AZURE_STORAGE_CONTAINER_NAME}
+
+jwt:
+  secret: ${JWT_SECRET:ThisIsAVeryLongSecretKeyForJWTTokenGenerationThatIsAtLeast32CharactersLong}
+  expiration: 86400000
+
+
+
+
