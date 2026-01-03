@@ -29,17 +29,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
-                .requestMatchers("GET", "/api/images").permitAll()
-                .requestMatchers("/api/images/*/download").permitAll()
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll() // 最关键的一行：允许所有请求
+                )
+                .csrf(csrf -> csrf.disable()); // 如果涉及POST等请求，通常需要关闭CSRF
         return http.build();
     }
 
